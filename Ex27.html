@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #fnameerrordiv,#lnameerrordiv,#ageerrordiv,#radioerror,#rollnoerrordiv,#mailerrordiv,#addresserrordiv,#cboxerrordiv,#droperrordiv{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form action="" id="faccess">
+        <div>
+            FirstName: <input type="text" id="fname" >
+            <div id="fnameerrordiv"></div>
+        </div>
+        <div>
+            Lastname: <input type="text" id="lname">
+            <div id="lnameerrordiv"></div>
+        </div>
+        <div>
+            Age: <input type="number" id="age">
+            <div id="ageerrordiv"></div>
+        </div>
+        <div>
+            Gender: <br> <input type="radio" name="gender" id="male" value="Male">
+            <label>Male</label>
+
+            <input type="radio" name="gender" id="female" value="Female">
+            <label>Female</label>
+
+            <input type="radio" name="gender" id="others" value="Others">
+            <label>Others</label>
+            <div id="radioerror"></div>
+        </div>
+        <div>
+            Rollnumber: <input type="text" id="rollno">
+            <div id="rollnoerrordiv"></div>
+        </div>
+        <div>
+            Email: <input type="email" id="mail">
+            <div id="mailerrordiv"></div>
+        </div>
+        <div>
+            Address: <textarea  id="address"></textarea>
+            <div id="addresserrordiv"></div>
+        </div>
+        <div>
+            Language: <br> <input type="checkbox" name="languages" id="tlang" value="Tamil">
+            <label for="">Tamil</label>
+
+            <input type="checkbox" name="languages" id="Elang" value="English">
+            <label for="">English</label>
+
+            <input type="checkbox" name="languages" id="Mlang" value="Malayalam">
+            <label for="">Malayalam</label>
+
+            <input type="checkbox" name="languages" id="Hlang" value="Hindi">
+            <label for="">Hindi</label>
+
+            <div id="cboxerrordiv"></div>
+        </div>
+        <br>
+        <div>
+            Select your district: <br>
+            <select id="dist" name="distselect">
+                <option value="ariyalur" name="one">Ariyalur</option>
+                <option value="chegalpattu" name="one">Chengalpattu</option>
+                <option value="chennai" name="one">Chennai</option>
+                <option value="coimbatore" name="one">Coimbatore</option>
+                <option value="dharmapuri" name="one">Dharmapuri</option>
+                <option value="erode" name="one">Erode</option>
+            </select>
+            <div id="droperrordiv"></div>
+        </div>
+        <br>
+
+    </form>
+    <button onclick="submit()">SUBMIT</button>
+
+    <script>
+
+        var errormap = new Map([
+            ["text","Invalid input"],
+            ["age","Enter a valid age"],
+            ["address","Enter a valid address"],
+            ["rollnumber","Enter a valid rollnumber"],
+            ["email","Enter valid mail"],
+            ["req","This field is required"],
+            ["radio","Please select gender"],
+            ["box","Please select language"]
+            
+        ]);
+
+        function submit(){
+        var form = document.getElementById("faccess");
+
+        // console.log(errormap);
+
+        for(i=0; i<form.length; i++){
+            var getform = form.elements[i]
+            // console.log(getform);
+
+            var ids = getform.id;
+            // console.log("ID:"+ids);
+
+            var f1check = /^[A-Za-z\t-\.]{4,25}$/;
+            var rollcheck=/^[A-Za-z0-9]{6,6}$/;
+
+            if(getform.type=="text"){
+            var field1 = getform.value;
+            console.log(field1);
+
+            if(field1.match(f1check)){
+                document.getElementById(ids+"errordiv").innerHTML="";
+            }
+            else if(field1.match(rollcheck)){
+                document.getElementById(ids+"errordiv").innerHTML="";
+            }
+            else if(field1.length==0){
+                document.getElementById(ids+"errordiv").innerHTML=errormap.get("req");
+            }
+            else{
+                document.getElementById(ids+"errordiv").innerHTML=errormap.get("text");
+            }
+            }
+
+
+            var f2check=/^[0-9]{1,3}$/;
+
+            if(getform.type=="number"){
+            var field2 = getform.value;
+            console.log(field2);
+
+                if(field2.match(f2check)){
+                document.getElementById(ids+"errordiv").innerHTML="";  
+                 }
+                 else if(field2.length==0){
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("req");
+                 }
+                 else {
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("age");
+                 }
+            }
+             
+            var f3check=/^[A-Za-z0-9\t-\.\/]+$/;
+
+            if(getform.type=="textarea"){
+                var field3 = getform.value;
+                console.log(field3);
+
+                if(field3.match(f3check)){
+                    document.getElementById(ids+"errordiv").innerHTML="";
+                }
+                else if(field3.length==0){
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("req");
+                }
+                else{
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("address");
+                }
+            }
+
+            var mailcheck = /^[a-zA-Z0-9]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+            if(getform.type=="email"){
+                var mailfield = getform.value;
+                console.log(mailfield);
+                
+                if(mailfield.match(mailcheck)){
+                    document.getElementById(ids+"errordiv").innerHTML="";
+                }
+                else if(mailfield.length==0){
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("req");
+                }
+                else{
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("email");
+                }
+            }
+
+            if(getform.type=="radio"){
+                var gradios = document.getElementsByName("gender");
+        
+                for(j=0; j<gradios.length; j++){
+                    // console.log(gradios[j]);
+                    if(gradios[j].checked){
+                        // console.log("if part");
+                        rval = gradios[j].value;
+                        console.log(rval);
+                        document.getElementById("radioerror").innerHTML="";
+                        break;
+                    }else{
+                        // console.log("else part");
+                        document.getElementById("radioerror").innerHTML=errormap.get("radio");
+                    }
+                }  
+            }
+            
+            if(getform.type=="checkbox"){
+                var cbox = document.getElementsByName("languages");
+                var carray=[];
+                var checkstatus=false;
+                
+                for(k=0; k<cbox.length; k++){ 
+                    if(cbox[k].checked){
+                        checkstatus=true;
+                        // console.log("if part")
+                        carray.push(cbox[k].value);
+                        document.getElementById("cboxerrordiv").innerHTML="";
+                        console.log(carray);
+
+                    }
+                    else{
+                        if(checkstatus==true){
+                            document.getElementById("cboxerrordiv").innerHTML="";
+                        }else{
+                            document.getElementById("cboxerrordiv").innerHTML=errormap.get("box");
+                        }
+                                           
+                    }
+                    
+                }
+            }
+
+            if(getform.name=="distselect"){
+                var getdrop = document.getElementsByName("one");
+                //  console.log(getdrop);
+
+                for(a=0; a<getdrop.length; a++){
+                   if(getdrop[a].selected){
+                    var dropval = getdrop[a].value;
+                    console.log(dropval);
+                   }
+             }
+            }
+            
+            
+        }           
+        }
+
+
+   
+
+
+
+
+
+    </script>
+</body>
+</html>

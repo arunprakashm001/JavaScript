@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #demo{
+            color: red;
+        }
+        #demo1{
+            color: red;
+        }
+        #demo2{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    username: <input type="text" id="name" onkeypress="namecheck()">
+    <div id="demo">
+    </div>
+    age: <input type="text" id="age" onkeypress="agecheck()">
+    <div id="demo1"></div>
+    address: <textarea  id="textarea" onkeypress="addresscheck()"></textarea>
+    <div id="demo2"></div>
+    <!-- <button onclick="submiting()">Submit</button> -->
+
+    <script>
+        
+
+            function namecheck(){
+             var box=event.which;
+             
+            if((box>=65 && box<=90) || (box>=97 && box<=122) || box==32){
+                document.getElementById("demo").innerHTML = "";
+                
+            }
+            else{
+                document.getElementById("demo").innerHTML = error.name;
+               
+            }
+        }
+
+        function agecheck(){
+            var box1=event.which;
+
+            if((box1>=48 && box1<=57)){
+               document.getElementById("demo1").innerHTML = "";
+            }
+            else{
+                document.getElementById("demo1").innerHTML = error.age;
+            }
+        }
+
+        function addresscheck(){
+            var box2=event.which;
+
+            if((box2>=65 && box2<=90) || (box2>=97 && box2<=122) || box2==32 ||(box2>=48 && box2<=57) || box2==44 || box2==47){
+                document.getElementById("demo2").innerHTML = "";
+            }
+            else{
+                document.getElementById("demo2").innerHTML = error.address
+            }
+        }
+
+        var error={
+            name:"Only Alphabets Allowed",
+            age:"Only Numbers Allowed",
+            address:"Enter Valid address by using(A-Z a-z space , / )"
+        }
+
+        
+    </script>
+
+</body>
+</html>

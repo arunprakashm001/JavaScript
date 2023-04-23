@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #demo1,#demo2,#demo3,#demo4,#demo5,#demo6,#demo7,#demo8,#demo9,#totalerror{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form id="formaccess" name="feedback">
+        <div>
+            Name: <input type="text" id="name" >
+            <div id="demo1"></div>
+        </div>
+        <div>
+            Age: <input type="number" id="age" >
+            <div id="demo2"></div>
+        </div>
+        <div>
+            RollNumber: <input type="text" id="rollno">
+            <div id="demo3"></div>
+        </div>
+        <div>
+            Email: <input type="email" id="mail">
+            <div id="demo4"></div>
+        </div>
+        <div>
+            Address:<textarea id="addresse"></textarea>
+            <div id="demo5"></div>
+        </div>
+        <div>
+            Mark1: <input type="number" id="mark1">
+            <div id="demo6"></div>
+        </div>
+        <div>
+            Mark2: <input type="number" id="mark2">
+            <div id="demo7"></div>
+        </div>
+        <div>
+            Mark3: <input type="number" id="mark3">
+            <div id="demo8"></div>
+        </div>
+        <div>
+            Total: <input type="text" id="total">
+            <div id="totalerror"></div>
+        </div>
+        <div>
+            Average: <input type="text" id="avg">
+        </div>
+        <div>
+            Grade: <input type="text" id="grade">
+        </div>
+        
+        
+        <!-- <div id="error"> </div> -->
+    </form>
+    <button onclick="submiting()">Submit</button>
+
+    <table id="table" border=" 1px solid">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>RollNumber</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Mark1</th>
+            <th>Mark2</th>
+            <th>Mark3</th>
+            <th>Total</th>
+            <th>Average</th>
+            <th>Grade</th>
+            <th>Actions</th>
+        </tr>
+    </table>
+
+    <script>
+
+    
+var x = document.getElementById("formaccess");
+   
+   
+
+    function submiting(){
+        
+           var studentData = readData();
+           console.log(studentData);
+
+            if((studentData.name=="" || studentData.age=="" || studentData.rollnumber=="" || studentData.email=="" || studentData.address=="" || studentData.mark1=="" || studentData.mark2=="" || studentData.mark3=="" || studentData.totall=="")){
+                alert("Invalid data");  
+            }
+            else if(wantedRow==""){
+                tableinsert(studentData);
+                formreset();
+            }
+            else{
+                update(studentData);
+            }
+            
+    }
+
+   
+    function readData(){
+        var student={};
+        for (i = 0; i<x.length; i++){
+        getelement = x.elements[i];
+
+       //------------------------------------------------Text-----------------------------------------------------------------//
+        if(getelement.type=="text"){
+
+            if(getelement.id=="rollno"){
+
+                var rollcheck = getelement.value;
+                // student.rollnumber=rollcheck;
+                //  console.log(student.rollnumber);
+
+                rollnovalid=/^[0-9A-Za-z]+$/; 
+
+                if(rollcheck.length==0){
+                document.getElementById("demo3").innerHTML = "Roll Number field will not be empty";
+                student.rollnumber="";
+                }
+                else if(rollcheck.length>6){
+                document.getElementById("demo3").innerHTML = "Roll number contain 6 characters only";
+                student.rollnumber="";
+                }
+                else if(rollcheck.length<6){
+                document.getElementById("demo3").innerHTML = "Minimum 6 character is required";
+                student.rollnumber="";
+                }
+                else if(rollnovalid.test(rollcheck)){
+                document.getElementById("demo3").innerHTML = "";
+                student.rollnumber = rollcheck;
+                }
+                else{
+                document.getElementById("demo3").innerHTML = "Enter valid roll number";
+                student.rollnumber="";
+                }
+
+            }
+            else if(getelement.id=="name"){
+                var check = getelement.value;
+                // student.name=check;
+                // console.log(student.name);
+                alpha = /^[A-Za-z\t-\.]+$/; 
+                if(check.length==0){
+                document.getElementById("demo1").innerHTML = "Name field will not be empty";
+                student.name="";
+                }
+                else if(check.length<4){
+                document.getElementById("demo1").innerHTML = "Minimum name characters is '4' ";
+                student.name="";
+               }
+               else if(check.length>25){
+                document.getElementById("demo1").innerHTML = "Maximum length 25";
+                student.name="";
+               }
+               else if(alpha.test(check)){
+                document.getElementById("demo1").innerHTML = "";
+                student.name=check;
+                }
+               else {
+                document.getElementById("demo1").innerHTML = "Enter Alphabets only";
+                student.name="";
+               } 
+            }
+            else if(getelement.id=="total"){
+                var add1=mark1val;
+                var add2=mark2val;
+                var add3=mark3val;
+                if(add1<=100 && add2<=100 && add3<=100){
+                    sum = parseInt(add1)+parseInt(add2)+parseInt(add3);
+                    document.getElementById("total").value=sum;
+                    student.totall=sum;
+                    // console.log(student.totall)
+                }
+                else{
+                    document.getElementById("totalerror").innerHTML="Please Enter the correct values";
+                    student.totall="";
+                }
+            }
+            else if(getelement.id=="avg"){
+                var div = sum;
+                var avgcheck = parseInt(div/3);
+                document.getElementById("avg").value = avgcheck;
+                student.average=avgcheck;
+                // console.log(student.average); 
+            }
+            else if(getelement.id=="grade"){
+                var grde = sum;
+               
+
+                if(grde>=250 && grde<=300){
+                document.getElementById("grade").value = "Grade-'A'";
+                student.grade = "Grade-'A'"; 
+                }
+                else if(grde>=150 && grde<250){
+                document.getElementById("grade").value = "Grade-'B'";
+                student.grade =  "Grade-'B'"; 
+                }
+                else if(grde==0){
+                document.getElementById("grade").value = "0";
+                 student.grade =  ""; 
+                }
+                else if(grde<150){
+                document.getElementById("grade").value = "Grade-'C'";
+                student.grade = "Grade-'C'"; 
+                }
+                // console.log(student.grade);
+            }
+           
+        }
+
+
+        //-------------------------------------Number------------------------------------------------------------------------------//
+        if(getelement.type=="number"){
+            var numcheck = getelement.value;
+            // student.age=numcheck;
+            // console.log(student.age);
+            var no = /^[0-9]+$/;
+            if(getelement.id=="age"){
+
+            if(numcheck.length==0){
+                document.getElementById("demo2").innerHTML = "Age Filed will not be empty";
+                student.age="";
+            }
+            else if(numcheck.length<2){
+                document.getElementById("demo2").innerHTML = "Minum age 10";
+                student.age="";
+            }
+            else if(numcheck.length>3){
+                document.getElementById("demo2").innerHTML = "Maximum age 100";
+                student.age="";
+            }
+            else if(no.test(numcheck)){
+                document.getElementById("demo2").innerHTML = "";
+                student.age=numcheck;
+            }
+            else{
+                document.getElementById("demo2").innerHTML = "Enter numbers only";
+                student.age="";
+            }
+        }
+        else if(getelement.id=="mark1"){
+
+            var mark1val=getelement.value;
+            // student.mark1=mark1val;
+            // console.log(student.mark1);
+            markcheck = /^[0-9]+$/;
+            
+            if(mark1val==""){
+                document.getElementById("demo6").innerHTML = "Marks1 field will not be empty";
+            } 
+           else if(mark1val.length==3){
+                if(mark1val==100){
+                    document.getElementById("demo6").innerHTML = "";
+                    student.mark1=mark1val;
+                   
+                }
+                if(mark1val>100){
+                    document.getElementById("demo6").innerHTML = "Enter upto 100";
+                    student.mark1="";
+                   
+                }
+            }
+            else if(mark1val.length>3){
+                document.getElementById("demo6").innerHTML = "Enter mark (0-100)";
+                student.mark1="";
+            }
+            else if(markcheck.test(mark1val)){
+                document.getElementById("demo6").innerHTML = "";
+                student.mark1=mark1val;
+            }
+            else{
+                document.getElementById("demo6").innerHTML = "Enter valid marks by using numbers only";
+                student.mark1="";
+                
+            }      
+        }
+        else if(getelement.id=="mark2"){
+
+         var mark2val=getelement.value;
+        //  student.mark2=mark2val;
+        //  console.log(student.mark2);
+         mark2check = /^[0-9]+$/;
+
+        if(mark2val==""){
+         document.getElementById("demo7").innerHTML = "Marks2 field will not be empty";
+         student.mark2="";
+        } 
+        else if(mark2val.length==3){
+        if(mark2val==100){
+        document.getElementById("demo7").innerHTML = "";
+        student.mark2=mark2val 
+        }
+        if(mark2val>100){
+        document.getElementById("demo7").innerHTML = "Enter upto 100";
+        student.mark2="";
+        }
+        }
+        else if(mark2val.length>3){
+        document.getElementById("demo7").innerHTML = "Enter mark (0-100)";
+        student.mark2="";
+        }
+        else if(mark2check.test(mark2val)){
+        document.getElementById("demo7").innerHTML = "";
+        student.mark2=mark2val
+        }
+        else{
+        document.getElementById("demo7").innerHTML = "Enter valid marks by using numbers only"; 
+        student.mark2="";
+        }      
+    }
+    else if(getelement.id=="mark3"){
+        var mark3val=getelement.value;
+        // student.mark3=mark3val
+        // console.log(student.mark3);
+        mark3check = /^[0-9]+$/;
+
+        if(mark3val==""){
+        document.getElementById("demo8").innerHTML = "Marks3 field will not be empty";
+        student.mark3="";
+        } 
+        else if(mark3val.length==3){
+        if(mark3val==100){
+        document.getElementById("demo8").innerHTML = "";
+        student.mark3=mark3val; 
+        }
+        if(mark3val>100){
+        document.getElementById("demo8").innerHTML = "Enter upto 100";
+        student.mark3="";
+        }
+    }
+       else if(mark3val.length>3){
+       document.getElementById("demo8").innerHTML = "Enter mark (0-100)";
+       student.mark3="";
+       }
+       else if(mark3check.test(mark3val)){
+       document.getElementById("demo8").innerHTML = "";
+       student.mark3=mark3val;
+       }
+       else{
+       document.getElementById("demo8").innerHTML = "Enter valid marks by using numbers only";
+       student.mark3=""; 
+       }      
+}
+        }
+
+        // ---------------------------------email------------------------------------------------------------------//
+        if(getelement.type=="email"){
+            var mailvl = getelement.value;
+            // student.email=mailvl;
+            // console.log(student.email);
+            var mailcheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            
+            if(mailvl.length==0){
+                document.getElementById("demo4").innerHTML = "Email field will not be empty";
+                student.email="";
+            }
+            else if(mailvl.length<14){
+                document.getElementById("demo4").innerHTML = "Minimum 15 characters is required";
+                student.email="";
+            }
+            else if(mailvl.length>30){
+                document.getElementById("demo4").innerHTML = "Maximum 30 characters only allowed";
+                student.email="";
+            }
+            else if(mailcheck.test(mailvl)){
+                document.getElementById("demo4").innerHTML = "";
+                student.email=mailvl;
+            }
+            else{
+                document.getElementById("demo4").innerHTML = "Enter valid Email";
+                student.email="";
+               
+            } 
+        }
+
+        //------------------------------------textarea-------------------------------------------------------//
+
+        if(getelement.type=="textarea"){
+            var addcheck = getelement.value;
+            // student.address=addcheck;
+            // console.log(student.address);
+            var add=/^[A-Za-z0-9\t-\.\/\,]+$/;
+            if(addcheck.length==0){
+                document.getElementById("demo5").innerHTML = "Address Field will not be empty";
+                student.address="";
+            }
+            else if(add.test(addcheck)){
+                document.getElementById("demo5").innerHTML = "";
+                student.address=addcheck;
+            }
+            else{
+                document.getElementById("demo5").innerHTML = "Enter Valid address";
+                student.address="";
+            }
+        }
+
+    } 
+    return student;
+    }
+
+    function tableinsert(student){
+        var tableval=document.getElementById("table");
+        var row = tableval.insertRow(-1);
+
+        var tget1 = row.insertCell(0);
+        tget1.innerHTML = student.name;
+
+        var tget2 = row.insertCell(1);
+        tget2.innerHTML = student.age;
+
+        var tget3 = row.insertCell(2);
+        tget3.innerHTML = student.rollnumber;
+
+        var tget4 = row.insertCell(3);
+        tget4.innerHTML = student.email;
+
+        var tget5 = row.insertCell(4);
+        tget5.innerHTML = student.address;
+
+        var tget6 = row.insertCell(5);
+        tget6.innerHTML = student.mark1;
+
+        var tget7 = row.insertCell(6);
+        tget7.innerHTML = student.mark2;
+
+        var tget8 = row.insertCell(7);
+        tget8.innerHTML = student.mark3;
+
+        var tget9 = row.insertCell(8);
+        tget9.innerHTML = student.totall;
+
+        var tget10 = row.insertCell(9);
+        tget10.innerHTML = student.average;
+
+        var tget11 = row.insertCell(10);
+        tget11.innerHTML = student.grade;
+
+        var tget12 = row.insertCell(11);
+        tget12.innerHTML = "<button onClick='onEdit(this)'>Edit</button> <button onClick='onDelete(this)'>Delete</button>"
+
+        }
+
+        function formreset(){
+            document.getElementById("formaccess").reset();
+        }
+
+        var wantedRow="";
+        function onEdit(tabledata){
+            wantedRow = tabledata.parentElement.parentElement;
+            console.log(wantedRow);
+
+            document.getElementById("name").value = wantedRow.cells[0].innerHTML;
+            document.getElementById("age").value = wantedRow.cells[1].innerHTML;
+            document.getElementById("rollno").value = wantedRow.cells[2].innerHTML;
+            document.getElementById("mail").value = wantedRow.cells[3].innerHTML;
+            document.getElementById("addresse").value = wantedRow.cells[4].innerHTML;
+            document.getElementById("mark1").value = wantedRow.cells[5].innerHTML;
+            document.getElementById("mark2").value = wantedRow.cells[6].innerHTML;
+            document.getElementById("mark3").value = wantedRow.cells[7].innerHTML;
+            document.getElementById("total").value = wantedRow.cells[8].innerHTML;
+            document.getElementById("avg").value = wantedRow.cells[9].innerHTML;
+            document.getElementById("grade").value = wantedRow.cells[10].innerHTML;
+
+        }
+
+        function update(student){
+            wantedRow.cells[0].innerHTML = student.name; 
+            wantedRow.cells[1].innerHTML = student.age;
+            wantedRow.cells[2].innerHTML = student.rollnumber;
+            wantedRow.cells[3].innerHTML = student.email;
+            wantedRow.cells[4].innerHTML = student.address;
+            wantedRow.cells[5].innerHTML = student.mark1;
+            wantedRow.cells[6].innerHTML = student.mark2;
+            wantedRow.cells[7].innerHTML = student.mark3;
+            wantedRow.cells[8].innerHTML = student.totall;
+            wantedRow.cells[9].innerHTML = student.average;
+            wantedRow.cells[10].innerHTML = student.grade;
+        }
+
+        function onDelete(tabledata){
+            var rowdelete = tabledata.parentElement.parentElement;
+            document.getElementById("table").deleteRow(rowdelete.rowIndex);
+        }
+
+                
+
+
+
+   
+
+
+    </script>
+</body> 
+</html>

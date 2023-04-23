@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+    <div>
+        username: <input type="text" name="" id="frst" onclick="return check()">
+        <p id="demo"></p>
+    </div>
+    <div>
+        age: <input type="text" id="sec" onclick="return valid()">
+        <p id="demo1"></p>
+    </div>
+    <!-- <button type="submit" onclick="return check()">Submit</button> -->
+  
+
+   <script>
+     function check(){
+        x=document.getElementById("frst");
+        // y=document.getElementById("sec");
+        alpha = /^[A-Za-z\s-, ]+$/;
+       
+        if(x.value==""){
+            document.getElementById("demo").innerHTML = "Please fill the name"
+            return false;
+        }
+
+        if(!alpha.test(x.value)){
+            document.getElementById("demo").innerHTML = "Please fill alphabet only ";
+            return false; 
+        }
+     }
+
+     function valid(){
+        y=document.getElementById("sec");
+        number = /^[0-9]+$/;
+        if(y.value==""){
+            document.getElementById("demo1").innerHTML = "Please fill the age";
+            return false;
+        }
+        if(!number.test(y.value)){
+            document.getElementById("demo1").innerHTML = "Please fill numbers only"
+        }
+     }
+   </script>
+
+</body>
+</html>

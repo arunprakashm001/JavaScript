@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #demo1{
+            color: red;
+        }
+        #demo2{
+            color: red;
+        }
+        #demo3{
+            color: red;
+        }
+       
+    </style>
+    
+</head>
+<body>
+    <div id="design">
+    Name: <input type="text" id="name" >
+    <div id="demo1"></div>
+    Age: <input type="text" id="age">
+    <div id="demo2"></div>
+    Address: <textarea  id="add"></textarea>
+    <div id="demo3"></div>
+    <button onclick="submiting()">Submit</button>
+</div>
+
+    <script>
+
+        function submiting(){
+
+            function namecheck(){
+                let box1 = document.getElementById("name");
+
+                let alpha = /^[A-Za-z\t-,]+$/;
+                if(alpha.test(box1.value)){
+                    document.getElementById("demo1").innerHTML = " ";
+                    return true;
+                }
+                else{
+                    document.getElementById("demo1").innerHTML = "Please Enter Alphabets only";
+                }
+
+
+                if(box1.value==""){
+                    document.getElementById("demo1").innerHTML = "Name will not be empty";
+                    // box1.focus();
+                    // box1.style.border="5px solid red"; 
+                    return true;
+                }
+                if(box1.value.length<4){
+                    document.getElementById("demo1").innerHTML = "Minimum 4 characters is required";
+                    return true;
+                }
+                if(box1.value.length>25){
+                    document.getElementById("demo1").innerHTML = "Maximum 25 characters is allowed";
+                    return true;
+                }
+                
+            }
+            namecheck()
+
+            function agecheck(){
+                let box2 = document.getElementById("age");
+                let number = /^[0-9]+$/;
+
+                if(box2.value==""){
+                    document.getElementById("demo2").innerHTML = "Age Will not be empty";
+                    return true;
+                }
+
+                if(box2.value.length<2){
+                    document.getElementById("demo2").innerHTML = "Minimum required age 18";
+                    return true;
+                }
+                if(box2.value.length>=3){
+                    document.getElementById("demo2").innerHTML = "Age will be at(18-100)";
+                    return true;
+                }
+                if(box2.value.length==2){
+                    if(box2.value>=18 && box2.value<=100){
+                        // console.log("if");
+                        document.getElementById("demo2").innerHTML = "";
+                        return true;
+                    }
+                    else{
+                        // console.log("else");
+                        document.getElementById("demo2").innerHTML = "Minimum 18";
+                    }
+                }
+                else if(number.test(box2.value)){
+                    document.getElementById("demo2").innerHTML = "";
+                    return true;
+                }
+                else{
+                    document.getElementById("demo2").innerHTML = "Please Enter Numbers Only";
+                }
+            }
+            agecheck()
+
+            function addresscheck(){
+                let box3=document.getElementById("add");
+                let address = /^[A-Za-z0-9\t-\,\/]+$/;
+                if(box3.value==""){
+                    document.getElementById("demo3").innerHTML = "Address will not be empty";
+                    return true;
+                }
+                if(address.test(box3.value)){
+                    document.getElementById("demo3").innerHTML = " ";
+                    return true;
+                }
+                else{
+                    document.getElementById("demo3").innerHTML = "Enter Valid address(A-Z a-z , space )"
+                }
+            }
+            addresscheck()
+
+        }
+
+
+    </script>
+</body>
+</html>

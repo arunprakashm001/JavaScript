@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    
+    <textarea onkeypress="press()" onkeydown="down()" onkeyup="up()">Hello</textarea><br>
+    
+    <script>
+        function press(){
+            console.log("pressmethod");
+        }
+        function up(){
+            console.log("upmethod")
+        }
+        function down(){
+            console.log("downmethod")
+        }
+
+    </script>
+
+<textarea onclick="myclick()" ondblclick="mydblclick()" onmouseenter="mcenter()" onmouseleave="mleave()"
+ onmousedown="mdown()" onmouseup="mup()" onmouseover="mover()" onmouseout="mout()" onmousemove="
+mmove()">Mouse Events</textarea>
+
+<script>
+    function myclick(){
+        console.log("clickmethod");
+    }
+    function mydblclick(){
+        console.log("doubleclickmethod");
+    }
+    function mdown(){
+        console.log("Mousedownmethod")
+    }
+    function mup(){
+        console.log("MouseUpmethod");
+    }
+    function mover(){
+        console.log("Mouseovermethod");
+    }
+    function mout(){
+        console.log("Mouseoutmethod");
+    }
+    function mmove(){
+        console.log("MouseMovemethod");
+    }
+    function mcenter(){
+        console.log("Mousecentermethod")
+    }
+    function mleave(){
+        console.log("Mouseleavemethod")
+    }
+</script>
+
+</body>
+</html>

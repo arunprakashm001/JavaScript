@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="testing">
+
+    </div>
+    <p id="testing2"></p>
+
+    <script>
+        document.getElementById("testing").innerHTML = "Lorem ipsum dolor sit amet consectetur adipisicing elit. A ea molestias ipsa sequi saepe! Illo itaque sed necessitatibus corporis. Aut repudiandae rerum asperiores, expedita sit id exercitationem error animi aliquid!"
+
+        get1 = document.getElementById("testing").innerHTML
+
+        console.log(get1)
+
+        document.getElementById("testing2").innerHTML = "lorem ipsum dolor sit amet consectetur adipisicing elit. a ea moletiea ipsa sequie saepe! Illo itaque sed necessitatibus corporis. Aut repudiandea rerum asperiores, expedita sit id exercitationem error animi aliquid!"
+
+        get2 = document.getElementById('testing2').innerHTML
+
+        console.log(get2)
+    </script>
+</body>
+</html>

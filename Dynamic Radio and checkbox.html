@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #fnameerrordiv,#lnameerrordiv,#ageerrordiv,#rollnoerrordiv,#gendererrordiv,#colourserrordiv,#sportserrordiv,#languageserrordiv,#distselecterrordiv{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form action="" id="faccess">
+        <div>
+            Fname: <input type="text" id="fname">
+            <div id="fnameerrordiv"></div>
+        </div>
+        <div>
+            Lname: <input type="text" id="lname">
+            <div id="lnameerrordiv"></div>
+        </div>
+        <div>
+            Age: <input type="number" id="age">
+            <div id="ageerrordiv"></div>
+        </div>
+        <div>
+            RollNumber: <input type="text" id="rollno">
+            <div id="rollnoerrordiv"></div>
+        </div>
+        <div>
+            Gender: <br> <input type="radio" name="gender" id="male" value="Male">
+            <label for="">Male</label>
+            <input type="radio" name="gender" id="female" value="Female">
+            <label for="">Female</label>
+            <input type="radio" name="gender" id="others" value="Others">
+            <label for="">Others</label>
+
+            <div id="gendererrordiv"></div>
+        </div>
+        <div>
+            Pick One Colour: <br> <input type="radio" name="colours" id="red" value="Red">
+            <label for="">Red</label>
+            <input type="radio" name="colours" id="blue" value="Blue">
+            <label for="">Blue</label>
+            <input type="radio" name="colours" id="pink" value="Pink">
+            <label for="">Pink</label>
+            <input type="radio" name="colours" id="white" value="White">
+            <label for="">White</label>
+            <input type="radio" name="colours" id="yellow" value="Yellow">
+            <label for="">Yellow</label>
+
+            <div id="colourserrordiv"></div>
+        </div>
+        <div>
+            Sports: <br> <input type="checkbox" name="sports" id="cricket" value="Cricket">
+            <label for="">Cricket</label>
+            <input type="checkbox" name="sports" id="football" value="Football">
+            <label for="">FootBall</label>
+            <input type="checkbox" name="sports" id="hockey" value="Hockey">
+            <label for="">Hockey</label>
+            <input type="checkbox" name="sports" id="tennis" value="Tennis">
+            <label for="">Tennis</label>
+            <input type="checkbox" name="sports" id="volleyball" value="Volleyball">
+            <label for="">VolleyBall</label>
+
+            <div id="sportserrordiv"></div>
+        </div>
+        <div>
+            Language: <br> <input type="checkbox" name="languages" id="tlang" value="Tamil">
+            <label for="">Tamil</label>
+            <input type="checkbox" name="languages" id="elang" value="English">
+            <label for="">English</label>
+            <input type="checkbox" name="languages" id="telang" value="Telugu">
+            <label for="">Telugu</label>
+            <input type="checkbox" name="languages" id="mlang" value="Malayalam">
+            <label for="">Malayalam</label>
+            <input type="checkbox" name="languages" id="hlang" value="Hindi">
+            <label for="">Hindi</label>
+
+            <div id="languageserrordiv"></div>
+        </div>
+        <div>
+            Select your district: <br>
+            <select id="dist" name="distselect">
+                <option value="select" name="one">--select--</option>
+                <option value="ariyalur" name="one">Ariyalur</option>
+                <option value="chegalpattu" name="one">Chengalpattu</option>
+                <option value="chennai" name="one">Chennai</option>
+                <option value="coimbatore" name="one">Coimbatore</option>
+                <option value="dharmapuri"name="one">Dharmapuri</option>
+                <option value="erode" name="one">Erode</option>
+            </select>
+            <div id="distselecterrordiv"></div>
+        </div>
+        <!-- <div>
+            Select your State: <br>
+            <select name="steselect" id="ste">
+            <option value="select">--select--</option>
+            <option value="tamilnadu">TamilNadu</option>
+            <option value="kerala">Kerala</option>
+            <option value="andhra">Andrapradhesh</option>
+            <option value="telugana">Telugana</option>
+            <option value="Karnataka">Karnataka</option>
+        </select>
+        <div id="steselecterrordiv"></div>
+        </div> -->
+
+    </form>
+    <button onclick="submit()">SUBMIT</button>
+
+    <script>
+
+        function submit(){
+            readdata();
+
+
+        }
+
+        function readdata(){
+            
+            var errormap = new Map([
+            ["text","Invalid Data"],
+            ["age","Enter a valid age"],
+            ["req","This field is required"],
+            ["radio","Please select One"],
+            ["box","Please select"],
+            ["drop","Please select"]
+            ])
+
+            var form = document.getElementById("faccess");
+
+            for(var i=0; i<form.length; i++){
+                var getform = form.elements[i];
+                // console.log(getform);
+
+                var ids = getform.id;
+                // console.log(ids);
+
+                var name = getform.name;
+                // console.log(name);
+                
+                var txtfld01check=/^[A-Za-z\t-\.]{4,25}$/;
+                var txtfld02check=/^[A-Za-z0-9]{6,6}$/;
+
+                if(getform.type=="text"){
+                    var field01 = getform.value;
+                    console.log(field01);
+
+                    if(field01.match(txtfld01check)){
+                        document.getElementById(ids+"errordiv").innerHTML="";
+                    }
+                    else if(field01.match(txtfld02check)){
+                        document.getElementById(ids+"errordiv").innerHTML="";
+                    }
+                    else if(field01.length==0){
+                        document.getElementById(ids+"errordiv").innerHTML=errormap.get("req");
+                    }
+                    else{
+                        document.getElementById(ids+"errordiv").innerHTML=errormap.get("text");
+                    }
+                }
+
+                var numfld01check=/^[0-9]{2,3}$/;
+
+                if(getform.type=="number"){
+                    var field02 = getform.value;
+                   console.log(field02);
+
+                    if(field02.match(numfld01check)){
+                        document.getElementById(ids+"errordiv").innerHTML="";
+                    }
+                    else if(field02.length==0){
+                        document.getElementById(ids+"errordiv").innerHTML=errormap.get("req");
+                    }
+                    else{
+                        document.getElementById(ids+"errordiv").innerHTML=errormap.get("age");
+                    }
+                }
+
+                if(getform.type=="radio"){
+
+                    var radios =document.getElementsByName(name);
+                    // console.log(radios);
+
+                    for(j=0; j<radios.length; j++){
+                        if(radios[j].checked){
+                            var rval = radios[j].value;
+                            console.log(rval);
+                            document.getElementById(name+"errordiv").innerHTML="";
+                            break;
+                        }
+                        else{
+                            document.getElementById(name+"errordiv").innerHTML=errormap.get("radio");
+                        }
+                    }
+                }
+
+                if(getform.type=="checkbox"){
+
+                    var cbox = document.getElementsByName(name);
+                    // console.log(cbox);
+                    var carray=[];
+                    var status = false;
+
+                    for(k=0; k<cbox.length; k++){
+                        if(cbox[k].checked){
+                            status=true;
+                            carray.push(cbox[k].value);
+                            document.getElementById(name+"errordiv").innerHTML="";
+                            console.log(carray);
+                        }
+                        else{
+                            if(status==true){
+                                document.getElementById(name+"errordiv").innerHTML="";
+                            }
+                            else{
+                                document.getElementById(name+"errordiv").innerHTML=errormap.get("box");
+                                
+                            }
+                        }
+                    }
+                }
+
+                if(getform.name=="distselect"){
+                    var getdrop = document.getElementsByTagName("option");
+                    // console.log(getdrop);
+                    var frstval =  document.getElementsByTagName("option")[0].value;
+                    // console.log(frstval);
+
+                    for(l=0; l<getdrop.length; l++){
+                        if(getdrop[l].selected){
+                            console.log("h1")
+                            var dropval=getdrop[l].value;
+                            console.log(dropval);
+                            document.getElementById(name+"errordiv").innerHTML="";
+                            console.log("h2")
+                        }
+                        else{
+                            if(frstval==dropval){
+                                console.log("h3")
+                                document.getElementById(name+"errordiv").innerHTML=errormap.get("drop");
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+
+    </script>
+</body>
+</html>

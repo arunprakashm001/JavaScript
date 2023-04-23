@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="radio" name="number" id="one">
+    <label for="one">One</label>
+
+    <input type="radio" name="number" id="two" checked>
+    <label for="two">Two</label>
+
+    <input type="radio" name="number" id="three">
+    <label for="three">Three</label>
+
+    <script>
+       // document.getElementsByName("number")
+        var num = document.getElementsByName("number")
+        console.log(num.length)
+
+        for(i=0; i<num.length; i++){
+            if(num[i].checked){
+                console.log(num[i]);
+            }
+        }
+
+        
+    </script>
+</body>
+</html>

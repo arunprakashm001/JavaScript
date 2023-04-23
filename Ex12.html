@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #demo1{
+            color: red;
+        }
+        #demo2{
+            color: red;
+        }
+        #demo3{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    Name: <input type="text" id="box1" >
+    <div id="demo1"></div>
+    Age: <input type="text" id="box2">
+    <div id="demo2"></div>
+    Address: <textarea  id="box3"></textarea>
+    <div id="demo3"></div>
+    <button onclick="submiting()">Submit</button>
+
+    <script>
+
+        function submiting(){
+
+            function namecheck(){
+                let x = document.getElementById("box1");
+                let alpha = /^[A-Za-z\t-,]+$/;
+                if(alpha.test(x.value)){
+                    document.getElementById("demo1").innerHTML = " ";
+                    return true;
+                }
+                else{
+                    document.getElementById("demo1").innerHTML = "Please Enter Alphabets Only"
+                }
+            }
+            namecheck()
+
+            function agecheck(){
+                let y = document.getElementById("box2");
+                let number = /^[0-9]+$/;
+                if(y.value==number.test(y.value)){
+                    document.getElementById("demo2").innerHTML = "";
+                    return true;
+                }
+                if(!number.test(y.value)){
+                    document.getElementById("demo2").innerHTML = "Please Enter Number only";
+                }
+            }
+            agecheck()
+
+            function addresscheck(){
+                let z=document.getElementById("box3");
+                let address = /^[A-Za-z0-9\t-\,\/]+$/;
+                if(z.value==address.test(z.value)){
+                    document.getElementById("demo3").innerHTML = " ";
+                    return true;
+                }
+                if(!address.test(z.value)){
+                    document.getElementById("demo3").innerHTML = "Enter Valid address(A-Z a-z , space )"
+                }
+            }
+            addresscheck()
+
+           
+
+        }
+
+
+    </script>
+</body>
+</html>

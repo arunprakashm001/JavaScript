@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #fnameerrordiv,#lnameerrordiv,#gendererrordiv,#dateerrordiv,#empiderrordiv,#ageerrordiv,#emailerrordiv,#addresserrordiv,#skillserrordiv,#vehicleerrordiv,#shiftserrordiv{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form action="" id="faccess">
+    <div>
+        Employee.FName: <input type="text" id="fname">
+        <div id="fnameerrordiv"></div>
+    </div>
+    <div>
+        Employee.Lname: <input type="text" id="lname">
+        <div id="lnameerrordiv"></div>
+    </div>
+    <div>
+        Employee.Gender: <br>
+        <input type="radio" name="gender" id="male" value="Male"> Male
+        <input type="radio" name="gender" id="female" value="Female"> Female
+        <input type="radio" name="gender" id="others" value="Others"> Others
+        <div id="gendererrordiv"></div>
+    </div>
+    <div>
+        Emp.JoiningDate: <input type="date" id="date">
+        <div id="dateerrordiv"></div>
+    </div>
+    <div>
+        Employee.ID: <input type="text" id="empid">
+        <div id="empiderrordiv"></div>
+    </div>
+    <div>
+        Employee.Shifts: <br>
+        <input type="radio" name="shifts" id="frst" value="FirstShift"> First Shift
+        <input type="radio" name="shifts" id="sec" value="SecondShift"> Second Shift
+        <input type="radio" name="shifts" id="tri" value="ThirdShift"> Third Shift
+        <div id="shiftserrordiv"></div>
+    </div>
+    <div>
+        Employee.Age: <input type="number" id="age">
+        <div id="ageerrordiv"></div>
+    </div>
+    <div>
+        Employee.Email: <input type="email" id="email">
+        <div id="emailerrordiv"></div>
+    </div>
+    <div>
+        Employee.Address: <textarea  id="address"></textarea>
+        <div id="addresserrordiv"></div>
+    </div>
+    <div>
+        Employee.Skills: <br>
+        <input type="checkbox" name="skills" id="html" value="HTML"> HTML
+        <input type="checkbox" name="skills" id="css" value="CSS"> CSS
+        <input type="checkbox" name="skills" id="js" value="Javascript"> Javascript
+        <input type="checkbox" name="skills" id="java" value="Java"> Java
+        <input type="checkbox" name="skills" id="php" value="PHP"> php
+        <input type="checkbox" name="skills" id="mysql" value="MySQL"> MySQL
+
+        <div id="skillserrordiv"></div>
+    </div>
+    <!-- <div>
+        Test : <br>
+        <input type="checkbox" name="test" value="one"> one
+        <input type="checkbox" name="test" value="two"> two
+
+        <div id="testerrordiv"></div>
+    </div> -->
+    <div>
+        Select your fav two wheeler company: <br>
+        <select id="twowheeler" name="vehicle">
+            <option value="select" name="bike">--select--</option>
+            <option value="Honda" name="bike">Honda</option>
+            <option value="Hero" name="bike">Hero</option>
+            <option value="TVS" name="bike">TVS</option>
+            <option value="RoyalEnfield" name="bike">RoyalEnfield</option>
+            <option value="OlaEV"name="bike">OLA EV</option>
+            <option value="Yamaha" name="bike">Yamaha</option>
+        </select>
+        <div id="vehicleerrordiv"></div>
+    </div>
+</form>
+
+<button onclick="submit()">SUBMIT</button>
+
+<script>
+    function submit(){
+      readdata();
+    }
+
+    function readdata(){
+
+        var errormap=new Map([
+            ["req","Required"],
+            ["valid","Enter valid data"],
+            ["date","Please select a date"],
+            ["radio","Please select one"],
+            ["box","Please select one"],
+            ["drop","Please select this"]
+            
+        ])
+
+        // var validate={};
+
+        var form = document.getElementById("faccess");
+
+        for(i=0; i<form.length; i++){
+            var getform=form.elements[i];
+            // console.log(getform);
+
+            var ids = getform.id;
+            // console.log(ids);
+
+            var name = getform.name;
+            // console.log(name);
+
+            var txt01check = /^[A-Za-z\t-\.]{4,25}$/;
+            var txt02check = /^[A-Za-z0-9]{7,8}$/
+            if(getform.type=="text"){
+                var txtbox = getform.value;
+                console.log(txtbox);
+
+                if(txtbox.match(txt01check)){
+                    document.getElementById(ids+"errordiv").innerHTML="";
+                    
+                }
+                else if(txtbox.match(txt02check)){
+                    document.getElementById(ids+"errordiv").innerHTML="";
+                    
+                }
+                else if(txtbox.length==0){
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("req");
+                }
+                else{
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("valid"); 
+                }
+
+            }
+
+            var num01check = /^[0-9]{2,3}$/;
+            if(getform.type=="number"){
+                var numbox=getform.value;
+                console.log(numbox);
+                if(numbox.match(num01check)){
+                    document.getElementById(ids+"errordiv").innerHTML="";
+                
+                }
+                else if(numbox.length==0){
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("req");
+                    
+                }
+                else{
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("valid");
+                    
+                }
+            }
+
+            if(getform.type=="date"){
+                var datebox = getform.value;
+                console.log(datebox);
+
+
+
+
+               var jd = new Date();
+            //    console.log(jd);
+
+               var day = jd.getDate();
+            //    console.log(day);
+
+               var month = jd.getMonth();
+            //    console.log(month);
+
+               var year = jd.getFullYear();
+            //    console.log(year);
+
+
+               var checkdte = year+"-"+"0"+(++month)+"-"+day;
+               console.log(checkdte);
+
+
+                if(datebox.length==0){
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("date");
+                }
+                else if(datebox==checkdte){
+                    document.getElementById(ids+"errordiv").innerHTML="Don't Select Todays Date";
+                }
+                else{
+                    document.getElementById(ids+"errordiv").innerHTML="";
+                }
+                
+            }
+
+            var mailcheck=/^[a-zA-Z0-9]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+            if(getform.type=="email"){
+                var mailbox = getform.value;
+                console.log(mailbox);
+                
+                if(mailbox.match(mailcheck)){
+                    document.getElementById(ids+"errordiv").innerHTML="";
+                }
+                else if(mailbox.length==0){
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("req");
+                }
+                else{
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("valid");
+                }
+            }
+
+            var addresscheck=/^[A-Za-z0-9\t-\.\/]+$/;
+
+            if(getform.type=="textarea"){
+                var addbox = getform.value;
+                console.log(addbox);
+                if(addbox.match(addresscheck)){
+                    document.getElementById(ids+"errordiv").innerHTML="";
+                }
+                else if(addbox.length==0){
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("req");
+                }
+                else{
+                    document.getElementById(ids+"errordiv").innerHTML=errormap.get("valid");
+                }
+            }
+
+            if(getform.type=="radio"){
+
+                var radios=document.getElementsByName(name);
+                // console.log(radios);
+                for(var j=0; j<radios.length; j++){
+                    if(radios[j].checked){
+                        var rval = radios[j].value;
+                        document.getElementById(name+"errordiv").innerHTML="";
+                        console.log(rval);
+                        break;
+                    }
+                    else{
+                        document.getElementById(name+"errordiv").innerHTML=errormap.get("radio");
+                    }
+                }
+            }
+
+            if(getform.type=="checkbox"){
+                var cbox = document.getElementsByName(name);
+                    // console.log(cbox);
+                    var carray=[];
+                    var status = false;
+
+                    for(k=0; k<cbox.length; k++){
+                        if(cbox[k].checked){
+                            status=true;
+                            carray.push(cbox[k].value);
+                            document.getElementById(name+"errordiv").innerHTML="";
+                            console.log(carray);
+                        }
+                        else{
+                            if(status==true){
+                                document.getElementById(name+"errordiv").innerHTML="";
+                            }
+                            else{
+                                document.getElementById(name+"errordiv").innerHTML=errormap.get("box");
+                                
+                            }
+                        }
+                    }
+            }
+            if(getform.name=="vehicle"){
+                var getdrop = document.getElementsByName("bike");
+                // console.log(getdrop);
+                var frstval = document.getElementsByName("bike")[0].value;
+                // console.log(frstval);
+                for(l=0; l<getdrop.length; l++){
+                        if(getdrop[l].selected){
+                            var dropval=getdrop[l].value;
+                            console.log(dropval);
+                            document.getElementById(name+"errordiv").innerHTML="";
+                        }
+                        else{
+                            if(frstval==dropval){
+                                document.getElementById(name+"errordiv").innerHTML=errormap.get("drop");
+                            }
+                        }
+                    }
+            }
+        }
+        
+    }
+
+ 
+</script>
+     
+</body>
+</html>

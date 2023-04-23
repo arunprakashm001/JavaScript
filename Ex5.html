@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <label for="name1">Name</label>
+        <input type="text" name="1st" id="name1"><br>
+
+        <label for="age1">Age</label>
+        <input type="number" name="2nd" id="age1"><br>
+
+        <label for="school1">School Name</label>
+        <input type="text" name="3rd" id="school1"><br>
+
+        <label for="tamil">Tamil</label>
+        <input type="number" name="tamil" id="tamil"><br>
+
+        <label for="eng">English</label>
+        <input type="number" name="english" id="eng"><br>
+
+        
+        <label for="math">Maths</label>
+        <input type="number" name="Maths" id="math"><br>
+
+        
+        <label for="sci">Science</label>
+        <input type="number" name="science" id="sci"><br>
+
+        
+        <label for="ssci">Social Science</label>
+        <input type="number" name="socialscience" id="ssci"><br>
+
+        <label for="tol">Total</label>
+        <input type="number" name="total" id="tol"><br>
+
+        <label for="avge">Average</label>
+        <input type="number/text" name="averagecol" id="avge"><br>
+
+        <label for="grde">Grade</label>
+        <input type="text" name="grade" id="grde">
+    </form>
+
+    <script>
+        var student ={}
+        student.name = "Suresh"
+        student.age = 12
+        student.schoolname ="Green Hr.Sec.School"
+        student.tamil=70;
+        student.english=80;
+        student.math=60;
+        student.science=92;
+        student.socialScience=100;
+
+        function total(){
+            student.total = student.tamil+student.english+student.math+student.science+student.socialScience
+        }
+        total()
+
+        function Average(get){
+            Avg=get
+            student.average= Avg/5;
+        }
+        Average(student.total)
+
+        function grd(marks){
+            grading=marks
+            if(grading>90 && grading<=100){
+                student.Grade="You Got a 'A' Grade";
+            }
+            else if(grading>80 && grading<=90){
+                student.Grade="You Got a 'B' Grade";
+            }
+            else if(grading>70 && grading<=80){
+                student.Grade="You Got a 'C' Grade";
+            } 
+        }
+        grd(student.average)
+
+        console.log(student)
+
+        document.getElementById("name1").value = student.name
+
+        document.getElementById("age1").value = student.age
+
+        document.getElementById("school1").value = student.schoolname
+
+        document.getElementById("tamil").value = student.tamil
+
+        document.getElementById("eng").value = student.english
+
+        document.getElementById("math").value = student.math
+
+        document.getElementById("sci").value = student.science
+
+        document.getElementById("ssci").value = student.socialScience
+
+        document.getElementById("tol").value = student.total
+
+        document.getElementById("avge").value = student.average
+
+        document.getElementById("grde").value = student.Grade
+        
+        
+
+
+    </script>
+</body>
+</html>

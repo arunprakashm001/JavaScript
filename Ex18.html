@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form>
+        <div>
+            Name: <input type="text" id="name">
+            <div id="demo1"></div>
+        </div>
+        <div>
+            Age: <input type="text" id="age">
+            <div id="demo2"></div>
+        </div>
+    </form>
+    <button onclick="submiting()">SUBMIT</button>
+
+    <table border="1px solid black" id="tablein">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Action</th>
+
+        </tr>
+    </table>
+
+    
+
+    <script>
+
+       function submiting(){
+        namecheck();
+        agecheck();
+        if(student.name=="" || student.age==""){
+            alert("Invalid data");
+        }
+        else if(selectedRow==""){
+           tableinsert();
+        }
+        else{
+            update();
+        }
+       
+        }
+
+        var student={};
+        function namecheck(){
+            var box1=document.getElementById("name").value;
+            alpha = /^[A-Za-z\t-\.]+$/;
+
+            if(alpha.test(box1)){
+                document.getElementById("demo1").innerHTML = "";
+                student.name = box1;
+                return true;
+            }
+            else{
+               document.getElementById("demo1").innerHTML = "Enter Alphabets only";
+               student.name ="";
+            }
+            if(box1==""){
+                document.getElementById("demo1").innerHTML = "Name field will not be empty";
+                student.name ="";
+                return true;
+            }
+            if(box1.length<4){
+                document.getElementById("demo1").innerHTML = "Minimum name characters is '4' ";
+                student.name ="";
+                return true
+            }
+            if(box1.length>25){
+                document.getElementById("demo1").innerHTML = "Maximum length 25";
+                student.name ="";
+                return true;
+            }   
+        }
+
+        function agecheck(){
+                var box2 = document.getElementById("age").value;
+                let number = /^[0-9]+$/;
+                console.log(agecheck)
+
+                if(box2 ==""){
+                    document.getElementById("demo2").innerHTML = "Age Will not be empty";
+                    student.age="";
+                    return true;  
+                }
+
+                if(box2<2){
+                    document.getElementById("demo2").innerHTML = "Minimum required age 18";
+                    student.age="";
+                    return true;   
+                }
+                if(box2.length>=3){
+                    document.getElementById("demo2").innerHTML = "Age will be at(18-100)";
+                    student.age="";
+                    return true;
+                    
+                }
+                if(box2.length==2){
+                    if(box2>=18 && box2<=100){
+                        document.getElementById("demo2").innerHTML ="";
+                        student.age = box2;
+                        return true;
+                    }
+                    else{
+                        document.getElementById("demo2").innerHTML = "Minimum 18";
+                        student.age="";
+                    }
+                }
+                else if(number.test(box2)){
+                    document.getElementById("demo2").innerHTML = "";
+                    student.age = box2;
+                    return true;   
+                }
+                else{
+                    document.getElementById("demo2").innerHTML = "Please Enter Numbers Only";
+                    student.age="";
+                    
+                }
+            }
+
+            function tableinsert(){
+                var insrt = document.getElementById("tablein");
+                var row = insrt.insertRow(-1);
+                var get1 = row.insertCell(0);
+                var get2 = row.insertCell(1);
+                var get3 = row.insertCell(2);
+                get1.innerHTML = student.name;
+                get2.innerHTML = student.age;
+                get3.innerHTML = "<button onClick='onEdit(this)'>Edit</button> <button onClick='onDelete(this)'>Delete</button> "
+            }
+
+            var selectedRow="";
+            function onEdit(td){
+                selectedRow = td.parentElement.parentElement;
+                console.log(selectedRow);
+                document.getElementById("name").value = selectedRow.cells[0].innerHTML;
+                document.getElementById("age").value = selectedRow.cells[1].innerHTML;
+            }
+
+            
+            function update(){
+               student.name = selectedRow.cells[0].innerHTML;
+               student.age = selectedRow.cells[1].innerHTML;
+            }
+
+            function onDelete(td){
+                rowdel=td.parentElement.parentElement;
+                console.log(rowdel);
+                document.getElementById("tablein").deleteRow(rowdel.rowIndex);
+            }
+    </script>
+</body>
+</html>

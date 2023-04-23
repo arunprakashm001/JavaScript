@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="" method="get">
+        <div>
+        <label for="username">User Name</label>
+        <input type="text" name="username" id="username" required>
+    </div>
+    <div>
+        <label for="email">email</label>
+        <input type="email" name="email" id="email">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required minlength="5">
+    </div>
+    <div>
+        <label for="dateofbirth">Dateofbirth</label>
+        <input type="text" name="dateofbirth" id="dateofbirth" maxlength="4">
+    </div>
+    <div>
+        <label>About</label>
+        <textarea name="smng" id="smng" cols="30" rows="10"></textarea>
+    </div>
+    <p id="demo"></p>
+    
+
+    <script>
+        document.getElementById("username").value = "manick"
+        name = document.getElementById("username").value
+
+       document.getElementById("email").value = "asdf@gmail.com"
+       email =  document.getElementById("email").value 
+
+       document.getElementById("password").value = "081234"
+       psw  =  document.getElementById("password").value 
+
+       document.getElementById("dateofbirth").value = "12-11-2001"
+       dob = document.getElementById("dateofbirth").value
+
+       document.getElementById("smng").value = "Hello Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem, expedita non! Modi voluptatibus error cupiditate dignissimos est quos porro cumque. Quasi repudiandae culpa quae veniam harum, magni sapiente dolorum et?"
+       textbox = document.getElementById("smng").value
+
+       
+
+       console.log(name);
+       console.log(email);
+       console.log(psw);
+       console.log(dob);
+       console.log(textbox)
+
+       
+       
+    </script>
+
+    
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    Name : <input type="text" id="name" onkeypress="return checkingname()">
+    <div id="demo"></div>
+
+    <script>
+        function checkingname(){
+            var frstbox=event.which;
+            if((frstbox>=65 && frstbox<=90) || (frstbox>=97 && frstbox<=122)){
+                document.getElementById("demo").innerHTML = "";
+                return true;
+            }
+            else{
+                event.preventDefault()
+            }
+        }
+    </script>
+
+
+    
+</body>
+</html>

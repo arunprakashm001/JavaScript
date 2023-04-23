@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #demo1{
+            color: red;
+        }
+        #demo2{
+            color: red;
+        }
+        #demo3{
+            color: red;
+        }
+        #demo4{
+            color: red;
+        }
+        #demo5{
+            color: red;
+        }
+        #demo6{
+            color: red;
+        }
+        #demo7{
+            color: red;
+        }
+        #demo8{
+            color: red;
+        }
+        #totalerror{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    Name: <input type="text" id="name">
+    <div id="demo1"></div>
+    RollNo: <input type="text" id="rollno">
+    <div id="demo2"></div>
+    Age: <input type="text" id="age">
+    <div id="demo3"></div>
+    Email: <input type="text" id="email">
+    <div id="demo4"></div>
+    Address: <textarea name="" id="address"></textarea>
+    <div id="demo5"></div>
+    Mark1: <input type="text" id="mark1" >
+    <div id="demo6"></div>
+    Mark2: <input type="text" id="mark2">
+    <div id="demo7"></div>
+    Mark3: <input type="text" id="mark3" onblur="total()">
+    <div id="demo8"></div>
+    
+    <div>
+        Total: <input type="text" id="total" >
+        <div id="totalerror"></div>
+    </div>
+    <div>
+        Average: <input type="text" id="avg">
+    </div>
+    <div>
+        Grade: <input type="text" id="grade">
+    </div>
+    
+    <button onclick="submiting()">SUBMIT</button>
+
+
+    <script>
+
+        function submiting(){
+            namecheck();
+            rollnocheck();
+            agecheck();
+            emailchecking();
+            addresscheck();
+            mark1check();
+            mark2check();
+            mark3check();
+        }
+              
+        function namecheck(){
+            box1=document.getElementById("name");
+            alpha = /^[A-Za-z\t-\.]+$/;
+
+            if(alpha.test(box1.value)){
+                document.getElementById("demo1").innerHTML = "";
+                return true;
+            }
+            else{
+                document.getElementById("demo1").innerHTML = "Enter Alphabets only";
+            }
+            if(box1.value==""){
+                document.getElementById("demo1").innerHTML = "Name field will not be empty";
+                return true;
+            }
+            if(box1.value.length<4){
+                document.getElementById("demo1").innerHTML = "Minimum name characters is '4' ";
+                return true
+            }
+            if(box1.value.length>25){
+                document.getElementById("demo1").innerHTML = "Maximum length 25";
+                return true;
+            }   
+        }
+
+        function rollnocheck(){
+            let box2 = document.getElementById("rollno");
+            let roll = /^[A-Za-z0-9]+$/;
+
+            if(box2.value==""){
+                document.getElementById("demo2").innerHTML = "Roll Number field will not be empty";
+                return true;
+            }
+            if(box2.value.length>6){
+                document.getElementById("demo2").innerHTML = "Roll number contain 6 characters only";
+                return true;
+            }
+            if(box2.value.length<6){
+                document.getElementById("demo2").innerHTML = "Minimum 6 character is required";
+                return true;
+            }
+            if(roll.test(box2.value)){
+                document.getElementById("demo2").innerHTML = "";
+                return true;
+            }
+            else{
+                document.getElementById("demo2").innerHTML = "Enter valid roll number";
+            }     
+        }
+
+        function agecheck(){
+            let box3=document.getElementById("age");
+            let old=/^[0-9]+$/;
+
+            
+            if(box3.value==""){
+                document.getElementById("demo3").innerHTML = "Age field will not be empty";
+                return true;
+            }
+            if(box3.value.length>=3){
+                document.getElementById("demo3").innerHTML = "Age will be upto(99)";
+                return true;
+            }
+            if(box3.value.length<2){
+                document.getElementById("demo3").innerHTML = "minimum age(10)";
+                return true;
+            }
+            if(box3.value.length==2){
+                if(box3.value>=10 && box3.value<=99){
+                    document.getElementById("demo3").innerHTML = "";
+                    return true;
+                }
+                else{
+                    document.getElementById("demo3").innerHTML = "Age(10-99)";
+                }
+            }
+            else if(old.test(box3.value)){
+                document.getElementById("demo3").innerHTML = "";
+                return true;
+            }
+            else{
+                document.getElementById("demo3").innerHTML = "Enter valid age";
+            } 
+        }
+
+        function emailchecking(){
+            let box4=document.getElementById("email");
+            let mailing = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+            if(mailing.test(box4.value)){
+                document.getElementById("demo4").innerHTML = "";
+                return true;
+            }
+            else{
+                document.getElementById("demo4").innerHTML = "Enter valid Email";
+            }
+            if(box4.value==""){
+                document.getElementById("demo4").innerHTML = "Email field will not be empty";
+                return true;
+            }
+            if(box4.value.length<15){
+                document.getElementById("demo4").innerHTML = "Minimum 15 characters is required";
+                return true;
+            }
+            if(box4.value.length>30){
+                document.getElementById("demo4").innerHTML = "Maximum 30 characters only allowed";
+                return true;
+            } 
+        }
+
+        function addresscheck(){
+            let box5=document.getElementById("address");
+            let add=/^[A-Za-z0-9\t\.\/\,]+$/;
+
+            if(box5.value==""){
+                document.getElementById("demo5").innerHTML = "Address field will be empty";
+                return true;
+            }
+            if(add.test(box5.value)){
+                document.getElementById("demo5").innerHTML = "";
+                return true;
+            }
+            else{
+                document.getElementById("demo5").innerHTML = "Enter valid address by using(/ , numbers space Aa-Zz)";
+            }
+        }
+
+        var mark1value=0;
+        function mark1check(){
+            var box6=document.getElementById("mark1");
+            var sub1=/^[0-9]+$/;
+
+            if(box6.value.length==3){
+                if(box6.value==100){
+                    document.getElementById("demo6").innerHTML = "";
+                    mark1value=box6.value;
+                    return true;
+                }
+                if(box6.value>100){
+                    document.getElementById("demo6").innerHTML = "Enter upto 100";
+                    return true;
+                }
+            }
+            if(box6.value.length>3){
+                document.getElementById("demo6").innerHTML = "Enter mark (0-100)";
+                return true;
+            }
+            if(sub1.test(box6.value)){
+                document.getElementById("demo6").innerHTML = "";
+                mark1value=box6.value;
+                return true;
+               
+            }
+            else{
+                document.getElementById("demo6").innerHTML = "Enter valid marks by using numbers only";
+            }     
+            if(box6.value==""){
+                document.getElementById("demo6").innerHTML = "Mark1 field will not be empty";
+                return true;
+            } 
+        }
+
+        var mark2value=0;
+        function mark2check(){
+            var box7=document.getElementById("mark2");
+            var sub2=/^[0-9]+$/;
+            
+            if(box7.value.length==3){
+                if(box7.value==100){
+                    document.getElementById("demo7").innerHTML = "";
+                    mark2value=box7.value;
+                    return true;
+                }
+                if(box7.value>100){
+                    document.getElementById("demo7").innerHTML = "Enter upto 100";
+                    return true;
+                }
+            }
+            if(box7.value.length>3){
+                document.getElementById("demo7").innerHTML = "Enter mark (0-100)";
+                return true;
+            }
+            if(sub2.test(box7.value)){
+                document.getElementById("demo7").innerHTML = "";
+                mark2value=box7.value;
+                return true;
+                
+            }
+            else{
+                document.getElementById("demo7").innerHTML = "Enter valid marks by using numbers only";
+            }     
+            if(box7.value==""){
+                document.getElementById("demo7").innerHTML = "Mark2 field will not be empty";
+                return true;
+            } 
+        }
+        var mark3value=0;
+
+        function mark3check(){
+            var box8=document.getElementById("mark3");
+            var sub3=/^[0-9]+$/;
+            
+            if(box8.value.length==3){
+                if(box8.value==100){
+                    document.getElementById("demo8").innerHTML = "";
+                    mark3value=box8.value;
+                    return true;
+                }
+                if(box8.value>100){
+                    document.getElementById("demo8").innerHTML = "Enter upto 100";
+                    return true;
+                }
+            }
+            if(box8.value.length>3){
+                document.getElementById("demo8").innerHTML = "Enter mark (0-100)";
+                return true;
+            }
+            if(sub3.test(box8.value)){
+                document.getElementById("demo8").innerHTML = "";
+                mark3value=box8.value;
+                return true;
+                
+            }
+            else{
+                document.getElementById("demo8").innerHTML = "Enter valid marks by using numbers only";
+            }     
+            if(box8.value==""){
+                document.getElementById("demo8").innerHTML = "Mark3 field will not be empty";
+                return true;
+            } 
+        }
+
+        function total(){
+            mark1=document.getElementById("mark1").value;
+            mark2=document.getElementById("mark2").value;
+            mark3=document.getElementById("mark3").value;
+            // console.log(mark1,mark2,mark3);
+            if(mark1<=100 && mark2<=100 && mark3<=100){
+           var sum = parseInt(mark1)+parseInt(mark2)+parseInt(mark3);
+           document.getElementById("total").value = sum;
+           average();
+           grade();
+            }
+            else{
+                document.getElementById("totalerror").innerHTML="Please Enter the correct values";
+            }
+            
+        }
+        function average(){
+            var get =Number(document.getElementById("total").value);
+            var div =(get/3);
+            document.getElementById("avg").value = div;
+        }
+        function grade(){
+            var info = Number(document.getElementById("total").value);
+            if(info>=250 && info<=300){
+                document.getElementById("grade").value = "Grade-'A'";
+            }
+            else if(info>=150 && info<250){
+                document.getElementById("grade").value = "Grade-'B'";
+            }
+            else if(info==0){
+                document.getElementById("grade").value = "0";
+            }
+            else if(info<150){
+                document.getElementById("grade").value = "Grade-'C'";
+            }
+        }
+
+
+
+    </script>
+
+    
+
+    
+</body>
+</html>

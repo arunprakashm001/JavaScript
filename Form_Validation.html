@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #demo1,#demo2,#demo3,#demo4,#demo5,#demo6,#demo7,#demo8,#demo9,#totalerror{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form action="" id="faccess">
+        <div>
+            Name:<input type="text" id="name">
+            <div id="demo1"></div>
+        </div>
+        <div>
+            Age: <input type="number" id="age">
+            <div id="demo2"></div>
+        </div>
+        <div>
+            Gender:
+            <input type="radio" name="gender" id="male" value="Male">
+            <label>Male</label>
+
+            <input type="radio" name="gender" id="female" value="Female">
+            <label>Female</label>
+
+            <input type="radio" name="gender" id="others" value="Others">
+            <label>Others</label>
+        </div>
+        <div>
+            Rollnumber: <input type="text" id="rollno">
+            <div id="demo3"></div>
+        </div>
+        <div>
+            Email: <input type="email" id="mail">
+            <div id="demo4"></div>
+        </div>
+        <div>
+            Address: <textarea  id="address"></textarea>
+            <div id="demo5"></div>
+        </div>
+        <div>
+            Mark1: <input type="number" id="mark1">
+            <div id="demo6"></div>
+        </div>
+        <div>
+            Mark2: <input type="number" id="mark2">
+            <div id="demo7"></div>
+        </div>
+        <div>
+            Mark3: <input type="number" id="mark3">
+            <div id="demo8"></div>
+        </div>
+        <div>
+            Total: <input type="number" id="total">
+            <div id="totalerror"></div>
+        </div>
+        <div>
+            Average: <input type="number" id="avg">
+        </div>
+        <div>
+            Grade: <input type="text" id="grade">
+        </div>
+        <div>
+            Language known: <br>
+            <input type="checkbox" name="languages" id="tlang" value="Tamil">
+            <label>Tamil</label>
+
+            <input type="checkbox" name="languages" id="elang" value="English">
+            <label>English</label>
+
+            <input type="checkbox" name="languages" id="telulang" value="Telugu">
+            <label>Telugu</label>
+
+            <input type="checkbox" name="languages" id="mlang" value="Malayalam">
+            <label>Malayalam</label>
+
+            <input type="checkbox" name="languages" id="hlang" value="Hindi">
+            <label>Hindi</label>
+        </div>
+
+    </form>
+    <button onclick="submiting()">SUBMIT</button>
+
+    <table id="taccess" border="1px">
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>AGE</th>
+                <th>Gender</th>
+                <th>ROLLNUMBER</th>
+                <th>EMAIL</th>
+                <th>ADDRESS</th>
+                <th>MARK 1</th>
+                <th>MARK 2</th>
+                <th>MARK 3</th>
+                <th>TOTAL</th>
+                <th>AVERAGE</th>
+                <th>GRADE</th>
+                <th>LANGUAGES</th>
+                <th>ACTION</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+       
+    </table>
+
+
+    <script>
+
+
+        function submiting(){
+            var studentData = readindata();
+            if((studentData.name=="" || studentData.age=="" || studentData.rollnumber=="" || studentData.email=="" || studentData.address=="" || studentData.mark1=="" || studentData.mark2=="" || studentData.mark3=="" || studentData.totall=="")){
+                alert("Ivalid Data");
+            }
+            else if(trow==""){
+
+                var getval = document.getElementById("rollno").value;
+
+                if(inputarray.length==0){
+                    array(studentData);
+                        tableinsert();
+                        formreset();
+                }
+                else{
+                    for(i=0; i<inputarray.length; i++){
+                        console.log(inputarray[i].rollnumber)
+                        if(getval==inputarray[i].rollnumber){
+                            // console.log("hello");
+                        alert("Duplicate Rollnumber");
+                        break;
+                        }
+                        else{
+                            // console.log("this");
+                        array(studentData);
+                        tableinsert();
+                        formreset();
+                        break;
+                        }
+                       }
+
+                }
+
+
+                    
+                      
+                       
+            }
+            else{
+                onUpdate(editstudent);
+            }
+            
+        }
+
+        function readindata(){
+        
+        var student = {};
+
+        var getform = document.getElementById("faccess");
+
+        for(i=0; i<getform.length; i++){
+            formelement = getform.elements[i];
+            // console.log(formelement);
+
+//-------------------------------------------------------Text----------------------------------------------------------//
+
+            if(formelement.type=="text"){
+                if(formelement.id=="name"){
+                    var namecheck = formelement.value;
+                    var alpha = /^[A-Za-z\t-\.]+$/;
+
+                if(namecheck.length==0){
+                document.getElementById("demo1").innerHTML = "Name field will not be empty";
+                student.name="";
+                }
+                else if(namecheck.length<4){
+                document.getElementById("demo1").innerHTML = "Minimum name characters is '4' ";
+                student.name="";
+                }
+                else if(namecheck.length>25){
+                document.getElementById("demo1").innerHTML = "Maximum length 25";
+                student.name="";
+                }
+                else if(alpha.test(namecheck)){
+                document.getElementById("demo1").innerHTML = "";
+                student.name=namecheck;
+                }
+                else {
+                document.getElementById("demo1").innerHTML = "Enter Alphabets only";
+                student.name="";
+                } 
+                }
+                else if(formelement.id=="rollno"){
+                var rollcheck = formelement.value;
+                var rc = /^[A-Za-z0-9]+$/;
+
+                if(rollcheck.length==0){
+                document.getElementById("demo3").innerHTML = "Roll Number field will not be empty";
+                student.rollnumber="";
+                }
+                else if(rollcheck.length>6){
+                document.getElementById("demo3").innerHTML = "Roll number contain 6 characters only";
+                student.rollnumber="";
+                }
+                else if(rollcheck.length<6){
+                document.getElementById("demo3").innerHTML = "Minimum 6 character is required";
+                student.rollnumber="";
+                }
+                else if(rc.test(rollcheck)){
+                document.getElementById("demo3").innerHTML = "";
+                student.rollnumber = rollcheck;
+                }
+                else{
+                document.getElementById("demo3").innerHTML = "Enter valid roll number";
+                student.rollnumber="";
+                } 
+            }
+            else if(formelement.id=="grade"){
+                var grde = sum;
+               
+
+                if(grde>=250 && grde<=300){
+                document.getElementById("grade").value = "Grade-'A'";
+                student.grade = "Grade-'A'"; 
+                }
+                else if(grde>=150 && grde<250){
+                document.getElementById("grade").value = "Grade-'B'";
+                student.grade =  "Grade-'B'"; 
+                }
+                else if(grde==0){
+                document.getElementById("grade").value = "0";
+                 student.grade =  ""; 
+                }
+                else if(grde<150){
+                document.getElementById("grade").value = "Grade-'C'";
+                student.grade = "Grade-'C'"; 
+                }
+                // console.log(student.grade);
+            }
+            }
+
+//--------------------------------------------------Numbers----------------------------------------------------//
+
+            if(formelement.type=="number"){
+            if(formelement.id=="age"){
+                    var agecheck=formelement.value;
+                    var no = /^[0-9]+$/;
+
+            if(agecheck.length==0){
+                document.getElementById("demo2").innerHTML = "Age Filed will not be empty";
+                student.age="";
+            }
+            else if(agecheck.length<2){
+                document.getElementById("demo2").innerHTML = "Minum age 10";
+                student.age="";
+            }
+            else if(agecheck.length>3){
+                document.getElementById("demo2").innerHTML = "Maximum age 100";
+                student.age="";
+            }
+            else if(no.test(agecheck)){
+                document.getElementById("demo2").innerHTML = "";
+                student.age=agecheck;
+            }
+            else{
+                document.getElementById("demo2").innerHTML = "Enter numbers only";
+                student.age="";
+            }
+            }
+            else if(formelement.id=="mark1"){
+                mark1val = formelement.value;
+                mark1check = /^[0-9]+$/;
+
+                if(mark1val.length==0){
+                document.getElementById("demo6").innerHTML = "Marks1 field will not be empty";
+                } 
+                else if(mark1val.length==3){
+                  if(mark1val==100){
+                    document.getElementById("demo6").innerHTML = "";
+                    student.mark1=mark1val;
+                   
+                  }
+                  if(mark1val>100){
+                    document.getElementById("demo6").innerHTML = "Enter upto 100";
+                    student.mark1="";
+                   
+                  }
+                }
+                else if(mark1val.length>3){
+                document.getElementById("demo6").innerHTML = "Enter mark (0-100)";
+                student.mark1="";
+                }
+                else if(mark1check.test(mark1val)){
+                document.getElementById("demo6").innerHTML = "";
+                student.mark1=mark1val;
+                }
+                else{
+                document.getElementById("demo6").innerHTML = "Enter valid marks by using numbers only";
+                student.mark1="";
+            }      
+            }
+            else if(formelement.id=="mark2"){
+                mark2val = formelement.value;
+                mark2check = /^[0-9]+$/;
+
+                if(mark2val.length==0){
+                document.getElementById("demo7").innerHTML = "Marks2 field will not be empty";
+                } 
+                else if(mark2val.length==3){
+                  if(mark2val==100){
+                    document.getElementById("demo7").innerHTML = "";
+                    student.mark2=mark2val;
+                   
+                  }
+                  if(mark2val>100){
+                    document.getElementById("demo7").innerHTML = "Enter upto 100";
+                    student.mark2="";
+                   
+                  }
+                }
+                else if(mark2val.length>3){
+                document.getElementById("demo7").innerHTML = "Enter mark (0-100)";
+                student.mark2="";
+                }
+                else if(mark2check.test(mark2val)){
+                document.getElementById("demo7").innerHTML = "";
+                student.mark2=mark2val;
+                }
+                else{
+                document.getElementById("demo7").innerHTML = "Enter valid marks by using numbers only";
+                student.mark2="";
+            }      
+            }
+            else if(formelement.id=="mark3"){
+                mark3val = formelement.value;
+                mark3check = /^[0-9]+$/;
+
+                if(mark3val.length==0){
+                document.getElementById("demo8").innerHTML = "Marks3 field will not be empty";
+                } 
+                else if(mark3val.length==3){
+                  if(mark3val==100){
+                    document.getElementById("demo8").innerHTML = "";
+                    student.mark3=mark3val;
+                   
+                  }
+                  if(mark3val>100){
+                    document.getElementById("demo8").innerHTML = "Enter upto 100";
+                    student.mark3="";
+                   
+                  }
+                }
+                else if(mark3val.length>3){
+                document.getElementById("demo8").innerHTML = "Enter mark (0-100)";
+                student.mark3="";
+                }
+                else if(mark3check.test(mark3val)){
+                document.getElementById("demo8").innerHTML = "";
+                student.mark3=mark3val;
+                }
+                else{
+                document.getElementById("demo8").innerHTML = "Enter valid marks by using numbers only";
+                student.mark3="";
+            }      
+            }
+            else if(formelement.id=="total"){
+                var add1=mark1val;
+                var add2=mark2val;
+                var add3=mark3val;
+                if(add1<=100 && add2<=100 && add3<=100){
+                   var sum = parseInt(add1)+parseInt(add2)+parseInt(add3);
+                    document.getElementById("total").value=sum;
+                    student.totall=sum;
+                    // console.log(student.totall)
+                }
+                else{
+                    document.getElementById("totalerror").innerHTML="Please Enter the correct values";
+                    student.totall="";
+                }
+            }
+            else if(formelement.id=="avg"){
+                var div = sum;
+                var avgcheck = parseInt(div/3);
+                document.getElementById("avg").value = avgcheck;
+                student.average=avgcheck;
+         
+            }
+            
+            }
+
+//--------------------------------------------------Mail--------------------------------------------------------//
+            if(formelement.type=="email"){
+                var emailcheck = formelement.value;
+                var eval = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+                if(emailcheck.length==0){
+                    document.getElementById("demo4").innerHTML = "Email Field will not be empty";
+                    student.email = "";
+                }
+                else if(emailcheck.length<14){
+                    document.getElementById("demo4").innerHTML = "Minimum 14 Characters required";
+                    student.email = "";
+                }
+                else if(emailcheck.length>30){
+                    document.getElementById("demo4").innerHTML = "Maximum 30 Characters only allowed";
+                    student.email="";
+                }
+                else if(eval.test(emailcheck)){
+                    document.getElementById("demo4").innerHTML = "";
+                    student.email = emailcheck;
+                }
+                else{
+                    document.getElementById("demo4").innerHTML = "Enter a valid Email";
+                    student.email = "";
+                }
+            }
+
+//-------------------------------------------------textarea-------------------------------------------------------//
+
+            if(formelement.type=="textarea"){
+                var addcheck = formelement.value;
+                var add = /^[A-Za-z0-9\t-\,\/]+$/;
+
+                if(addcheck.length==0){
+                    document.getElementById("demo5").innerHTML = "Address Field will not be empty";
+                    student.address = "";
+                }
+                else if(add.test(addcheck)){
+                    document.getElementById("demo5").innerHTML = "";
+                    student.address = addcheck;
+                }
+                else{
+                    document.getElementById("demo5").innerHTML = "Enter valid Address";
+                    student.address = "";
+                }
+            }
+
+//----------------------------------------------------radio--------------------------------------------------------//
+            if(formelement.type=="radio"){
+
+                var r = document.getElementsByName("gender");
+
+                for(j=0; j<r.length; j++){
+                    if(r[j].checked){
+                        rval = r[j].value;
+                        student.gender = rval;
+                    }
+                }
+            }
+
+//---------------------------------------------------checkbox--------------------------------------------------------//
+
+            if(formelement.type=="checkbox"){
+                var cbox = document.getElementsByName("languages");
+                var carray=[];
+
+                for(k=0; k<cbox.length; k++){
+                    if(cbox[k].checked){
+                        carray.push(cbox[k].value);
+                        student.languages = carray;
+                        // console.log(carray);
+                    }
+                }
+            }
+        }
+        return student;
+    }
+
+    var inputarray = [];
+    function array(student){
+
+        inputarray.push(student);
+        console.log(inputarray);
+        
+    }
+
+
+   
+    function tableinsert(){
+
+          var table = document.getElementById("tbody");
+          table.innerHTML = "";
+
+        var table = document.getElementById("tbody");
+
+        for(var i=0; i<inputarray.length; i++)
+           {
+               var newRow = table.insertRow(table.length);
+
+                   var cell1 = newRow.insertCell(0);
+                   cell1.innerHTML = inputarray[i].name;
+
+                   var cell2 = newRow.insertCell(1);
+                   cell2.innerHTML = inputarray[i].age;
+
+                   var cell3 = newRow.insertCell(2);
+                   cell3.innerHTML = inputarray[i].gender;
+
+                   var cell4 = newRow.insertCell(3);
+                   cell4.innerHTML = inputarray[i].rollnumber;
+
+                //    var testing = document.getElementById("rollno").value;
+                //    console.log(testing);
+
+                //    var rget = inputarray[i].rollnumber;
+                //    console.log(rget);
+
+                   var cell5 = newRow.insertCell(4);
+                   cell5.innerHTML = inputarray[i].email;
+
+                   var cell6 = newRow.insertCell(5);
+                   cell6.innerHTML = inputarray[i].address;
+
+                   var cell7 = newRow.insertCell(6);
+                   cell7.innerHTML = inputarray[i].mark1;
+
+                   var cell8 = newRow.insertCell(7);
+                   cell8.innerHTML = inputarray[i].mark2;
+
+                   var cell9 = newRow.insertCell(8);
+                   cell9.innerHTML = inputarray[i].mark3;
+
+                   var cell10 = newRow.insertCell(9);
+                   cell10.innerHTML = inputarray[i].totall;
+
+                   var cell11 = newRow.insertCell(10);
+                   cell11.innerHTML = inputarray[i].average;
+
+                   var cell12 = newRow.insertCell(11);
+                   cell12.innerHTML = inputarray[i].grade;
+
+                   var cell13 = newRow.insertCell(12);
+                   cell13.innerHTML = inputarray[i].languages;
+
+                   var cell14 = newRow.insertCell(13);
+                   cell14.innerHTML = "<button onClick='onEdit(this)'>Edit</button> <button onClick='onDelete(this)'>Delete</button> ";
+
+                }
+          
+           
+
+    }
+
+    function formreset(){
+        document.getElementById("faccess").reset();
+    }
+
+    var trow = "";
+    function onEdit(td){
+        formreset();
+        trow = td.parentElement.parentElement;
+        // console.log(trow);
+
+        document.getElementById("name").value = trow.cells[0].innerHTML;
+
+        document.getElementById("age").value = trow.cells[1].innerHTML;
+
+        var redit = trow.cells[2].innerHTML;
+        var radio = document.getElementsByName("gender");
+
+        for(i=0; i<radio.length; i++){
+            if(redit==radio[i].value){
+                radio[i].checked = true;
+            }
+        }
+
+        document.getElementById("rollno").value = trow.cells[3].innerHTML;
+        document.getElementById("mail").value = trow.cells[4].innerHTML;
+        document.getElementById("address").value = trow.cells[5].innerHTML;
+        document.getElementById("mark1").value = trow.cells[6].innerHTML;
+        document.getElementById("mark2").value = trow.cells[7].innerHTML;
+        document.getElementById("mark3").value = trow.cells[8].innerHTML;
+        document.getElementById("total").value = trow.cells[9].innerHTML;
+        document.getElementById("avg").value = trow.cells[10].innerHTML;
+        document.getElementById("grade").value = trow.cells[11].innerHTML;
+
+        var cedit = trow.cells[12].innerHTML;
+        var cbox = document.getElementsByName("languages");
+        var langarry = cedit.split(",");
+
+        for(j=0; j<cbox.length; j++){
+            for(k=0; k<langarry.length; k++){
+                if(langarry[k]==cbox[j].value){
+                    cbox[j].checked = true;
+                }
+            }
+        }
+
+    }
+    
+    function onDelete(td){
+        var rowdel = td.parentElement.parentElement;
+        document.getElementById("taccess").deleteRow(rowdel.rowIndex);
+    }
+
+    var editstudent={};
+    function onUpdate(student){
+
+        editstudent.name =  document.getElementById("name").value;
+        editstudent.age =  document.getElementById("age").value;
+        var r = document.getElementsByName("gender");
+
+                for(j=0; j<r.length; j++){
+                    if(r[j].checked){
+                        rval = r[j].value;
+                        student.gender = rval;
+                    }
+                }
+        editstudent.rollnumber =  document.getElementById("rollno").value;
+        editstudent.email =  document.getElementById("mail").value;
+        editstudent.address =  document.getElementById("address").value;
+        editstudent.mark1 =  document.getElementById("mark1").value;
+        editstudent.mark2 =  document.getElementById("mark2").value;
+        editstudent.mark3 =  document.getElementById("mark3").value;
+        editstudent.totall =  document.getElementById("total").value;
+        editstudent.average =  document.getElementById("avg").value;
+        editstudent.grade =  document.getElementById("grade").value;
+
+        var c = document.getElementsByName("languages");
+        var carray=[];
+
+        for(k=0; k<c.length; k++){
+            if(c[k].checked){
+                carray.push(c[k].value);
+                student.languages=carray;
+            }
+        }
+
+        trow.cells[0].innerHTML = student.name;
+        trow.cells[1].innerHTML = student.age;
+        trow.cells[2].innerHTML = student.gender;
+        trow.cells[3].innerHTML = student.rollnumber;
+        trow.cells[4].innerHTML = student.email;
+        trow.cells[5].innerHTML = student.address;
+        trow.cells[6].innerHTML = student.mark1;
+        trow.cells[7].innerHTML = student.mark2;
+        trow.cells[8].innerHTML = student.mark3;
+        trow.cells[9].innerHTML = student.totall;
+        trow.cells[10].innerHTML = student.average;
+        trow.cells[11].innerHTML = student.grade;
+        trow.cells[12].innerHTML = student.languages;
+
+
+        for(i=0; i<inputarray.length; i++){
+
+            if(inputarray[i].rollnumber==student.rollnumber){
+                inputarray[i].name = student.name;
+                inputarray[i].age = student.age;
+                inputarray[i].gender = student.gender;
+                inputarray[i].rollnumber = student.rollnumber;
+                inputarray[i].email = student.email;
+                inputarray[i].address = student.address;
+                inputarray[i].mark1 = student.mark1;
+                inputarray[i].mark2 = student.mark2;
+                inputarray[i].mark3 = student.mark3;
+                inputarray[i].totall = student.totall;
+                inputarray[i].average = student.average;
+                inputarray[i].grade = student.grade;
+                inputarray[i].languages = student.languages;
+               
+                console.log(inputarray);
+            }
+        }
+    }
+  
+
+
+    </script>
+</body>
+</html>
