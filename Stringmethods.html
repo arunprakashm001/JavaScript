@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="demo1"></p>
+    <script>
+        let text1 = "asdfghjklpoiuytrevb";
+        document.getElementById("demo1").innerHTML=text1.length;
+    </script>
+    <hr>
+
+    <p id="demo2"></p>
+    <script>
+    let text2 = "One, Two, Three, Four, Five";
+     let part = text2.slice(10,15);
+     document.getElementById("demo2").innerHTML = part;
+    </script>
+    <hr>
+
+    <p id="demo3"></p>
+    <script>
+        let text3 = "Tomcruise, Rovan, johnsnow, Ross, Chandler, Joey";
+        let check1 = text3.slice(-14,-6);
+        document.getElementById("demo3").innerHTML = check1;
+    </script>
+    <hr>
+
+    <p id="demo4"></p>
+    <script>
+        let text4 = "Hentry, Adam, Windiesel, jack, roshan, kim";
+        let check2 = text4.substring(25,29);
+        document.getElementById("demo4").innerHTML = check2;
+    </script>
+    <hr>
+
+    <p id="demo5"></p>
+    <script>
+        let text5 = "switch, box, moniter, keyboard, mouse, button, camera";
+        let check3 = text5.substr(8,);
+        document.getElementById("demo5").innerHTML = check3;
+    </script>
+    <hr>
+
+    <p id="demo6"></p>
+    <script>
+        let text6 = "This is checking the random";
+        let check4 = text6.replace("checking","testing");
+        document.getElementById("demo6").innerHTML = check4;
+    </script>
+    <hr>
+
+    <p id="demo7"></p>
+    <script>
+        let text7 = "The BoOk has the Many pages";
+        let check5 = text7.replace(/book/i,"Chapter");
+        document.getElementById("demo7").innerHTML = check5;
+    </script>
+    <hr>
+
+    <p id="demo8"></p>
+    <script>
+        let text8 = "The dogs are very smart. Dogs is a pet animal. dogs are home animal and it is Dogs";
+       text8 = text8.replaceAll("dogs","cats");
+       text8 = text8.replaceAll("Dogs","Cats");
+       document.getElementById("demo8").innerHTML = text8;
+    </script>
+    <hr>
+
+    <p id="demo9"></p>
+    <script>
+        let text9 = "Fix the";
+        let text10 = "new Table";
+        let text11 = text9.concat(" ",text10);
+        document.getElementById("demo9").innerHTML = text11;
+    </script>
+    <hr>
+
+    <p id="demo10"></p>
+    <script>
+        let text12 = "         Saying Hello again            ";
+        document.getElementById("demo10").innerHTML = text12;
+    </script>
+    <hr>
+
+    <script>
+        let text13 = "Finding the words in a string";
+       
+        document.write( text13.indexOf("a"));
+    </script>
+    <hr>
+
+    <p id="demo11"></p>
+    <script>
+        let text14 = '1';
+        let text15 = '5';
+        let text16 = text15.concat(" ",text14);
+        document.getElementById("demo11").innerHTML = text16;
+
+    </script>
+
+    <p id="demo12"></p>
+    <script>
+        let str = "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+        console.log(str.includes("ipsum"));
+    </script>
+</body>
+</html>
